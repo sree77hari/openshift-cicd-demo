@@ -21,7 +21,7 @@ spec:
       bindings:
         - ref: gogs-triggerbinding
       template:
-        ref: petclinic-trigger-template
+        name: petclinic-trigger-template
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
