@@ -26,7 +26,7 @@ spec:
     kind: PipelineRun
     metadata:
       generateName: petclinic-build-
-      # name: petclinic-dev-$(tt.params.gitbranchname)-$(tt.params.gitshortsha)
+        name: petclinic-dev-$(tt.params.gitbranchname)-$(tt.params.gitshortsha)
       labels:
         tekton.dev/pipeline: petclinic-build
     spec:
