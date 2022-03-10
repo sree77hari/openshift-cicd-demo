@@ -8,12 +8,8 @@ spec:
   triggers:
     - name: petclinic-webhook
       interceptors:
-        - name: "add short sha"
-          ref:
-            name: "cel"
-          params:
-          - name: "overlays"
-            value:
+        - cel:
+            overlays:
             - key: short_sha
               expression: "body.after.truncate(7)"
             - key: branch_name
