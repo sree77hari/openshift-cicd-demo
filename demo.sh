@@ -82,9 +82,13 @@ command.install() {
   info "Configure service account permissions for pipeline"
   oc policy add-role-to-user edit system:serviceaccount:$cicd_prj:pipeline -n $dev_prj
   oc policy add-role-to-user edit system:serviceaccount:$cicd_prj:pipeline -n $stage_prj
+  oc policy add-role-to-user edit system:serviceaccount:$cicd_prj:pipeline -n $cicd_prj
   oc policy add-role-to-user system:image-puller system:serviceaccount:$dev_prj:default -n $cicd_prj
   oc policy add-role-to-user system:image-puller system:serviceaccount:$stage_prj:default -n $cicd_prj
-
+  oc adm policy add-scc-to-user privileged system:serviceaccount:$cicd_prj:pipeline -n $dev_prj
+  oc adm policy add-scc-to-user privileged system:serviceaccount:$cicd_prj:pipeline -n $stage_prj
+  oc adm policy add-scc-to-user privileged system:serviceaccount:$cicd_prj:pipeline -n $cicd_prj
+  
   info "Grants permissions to ArgoCD instances to manage resources in target namespaces"
   oc label ns $dev_prj argocd.argoproj.io/managed-by=$cicd_prj
   oc label ns $stage_prj argocd.argoproj.io/managed-by=$cicd_prj
